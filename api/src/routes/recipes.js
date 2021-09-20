@@ -1,6 +1,8 @@
-var router = require('./index');
-const { Recipe, Dieta } = require('./db.js')
+var {Router} = require('express');
+const {addRecipe} = require('../controllers/recipes.js');
 
-router.post('/', async function(req, res){
-    const recipes = Recipe.findAll()
-})
+const router = Router();
+
+router.post('/recipe', addRecipe);
+
+module.exports = router;
