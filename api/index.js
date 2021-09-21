@@ -57,11 +57,15 @@ conn.sync({ force: true }).then(() => {
       category: 'Pescatarian'
     })
 
-    var fodmap = DietaType.create({
-      category: 'Fodmap friendly'
+    var ketogenic = DietaType.create({
+      category: 'Ketogenic'
     })
 
-    Promise.all([glutenFree, dairyFree, lov, vegan, vegetarian, primal, paleolithic, pescatarian, fodmap])
+    var whole = DietaType.create({
+      category: 'Whole 30'
+    })
+
+    Promise.all([glutenFree, dairyFree, lov, vegan, vegetarian, primal, paleolithic, pescatarian, ketogenic, whole])
       .then(res => {
         console.log('Categorias precargadas')
       });

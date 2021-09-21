@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
     sequelize.define('dietaType', {
-        name:{
+        category:{
             type: DataTypes.STRING,
             allowNull: false
         }
