@@ -8,7 +8,7 @@ const { Sequelize } = require("sequelize")
 const addRecipe = async function(req, res){
 
     const {title, summary, spoonacularScore, healthScore, instructions, diets, image} = req.body;
-    if (!title || !summary) return res.send({ error: 500, message: "Necesita un titulo y un resumen como mínimo" });
+    if (!title || !summary) return res.status(500).send({ error:"Necesita un titulo y un resumen como mínimo" });
     //Checkeamos que tenga titulo y resumen si lo tiene pasamos a crear la receta
     try{
         const recipe = await Recipe.create({
@@ -29,25 +29,24 @@ const addRecipe = async function(req, res){
 };
 
 const getAllRecipes = async function(req, res){
-    const ttl = req.query.id;
-    const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=100`); // .data.results.map((recipe) => {
-        const infoNeededApi = /*await*/ recipeApi.data.results.map((recipe) => {
-            return {
-                title: recipe.title,
-                diets: recipe.diets.map((diet) => { return { category: diet } }),
-                healthScore: parseInt(recipe.healthScore),
-                summary: recipe.summary,
-                aggregateLikes: recipe.aggregateLikes,
-                image: recipe.image,
-                id: recipe.id,
-                spoonacularScore: parseInt(recipe.spoonacularScore),
-                instructions: recipe.analyzedInstructions
-            }
-        });
+    const ttl = req.query.name;
 
     if(!ttl){ //preguntamos si hay algun titulo ingresado en el query(es para cuando buscamos en el search)
         try{
-            
+            const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=10`);
+            const infoNeededApi = await recipeApi.data.results.map((recipe) => {
+                return {
+                    title: recipe.title,
+                    diets: recipe.diets.map((diet) => { return { category: diet } }),
+                    healthScore: parseInt(recipe.healthScore),
+                    summary: recipe.summary,
+                    aggregateLikes: recipe.aggregateLikes,
+                    image: recipe.image,
+                    id: recipe.id,
+                    spoonacularScore: parseInt(recipe.spoonacularScore),
+                    instructions: recipe.analyzedInstructions
+                }
+            });
             const recipeDB = await Recipe.findAll({
                 include: {
                     model: DietaType,
@@ -68,6 +67,20 @@ const getAllRecipes = async function(req, res){
     else{
         const ttlMinus = ttl.toLowerCase(); //lo hacemos minuscula y buscamos coincidencias mapeando los titulos de la busqueda
         try{
+            const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=10`); // .data.results.map((recipe) => {
+            const infoNeededApi = await recipeApi.data.results.map((recipe) => {
+                return {
+                    title: recipe.title,
+                    diets: recipe.diets.map((diet) => { return { category: diet } }),
+                    healthScore: parseInt(recipe.healthScore),
+                    summary: recipe.summary,
+                    aggregateLikes: recipe.aggregateLikes,
+                    image: recipe.image,
+                    id: recipe.id,
+                    spoonacularScore: parseInt(recipe.spoonacularScore),
+                    instructions: recipe.analyzedInstructions
+                }
+            });
             const filterRecipeApi = await infoNeededApi.filter(recipe => recipe.title.toLowerCase().includes(ttlMinus))
 
             const recipeDB = await Recipe.findAll({ //en la base de datos hacemos lo mismo
@@ -96,19 +109,35 @@ const getAllRecipes = async function(req, res){
 
 const getRecipeById = async function(req, res){
     const id = req.params.id;
-    try{
+    try{ //buscamos en la api el id en primera instancia
         const response = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
+        // const infoNeededApi = await response.data.map((recipe) => {
+        //     return {
+        //         title: recipe.title,
+        //         diets: recipe.diets.map((diet) => { return { category: diet } }),
+        //         healthScore: parseInt(recipe.healthScore),
+        //         summary: recipe.summary,
+        //         aggregateLikes: recipe.aggregateLikes,
+        //         image: recipe.image,
+        //         id: recipe.id,
+        //         spoonacularScore: parseInt(recipe.spoonacularScore),
+        //         instructions: recipe.analyzedInstructions
+        //     }
+        // });
+        
         res.json(response.data)
     }
-    catch(error){
+    catch(error){ //si devuelve error 404 buscamos en DB
+        console.log(error.response)
         if(error.response.status === 404){
+            // console.log(error)
             const recipe = await Recipe.findByPk(id, {
                 include: {
-                    model: Diets,
-                    attributes: ["category"],
+                    model: DietaType,
+                    attributes: ["category"]/*,
                     through: {
                     attributes: []
-                    }
+                    }*/
                 }
             })
             if (recipe){
