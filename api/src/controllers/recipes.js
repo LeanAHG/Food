@@ -8,8 +8,7 @@ const { Sequelize } = require("sequelize")
 const addRecipe = async function(req, res){
 
     const {title, summary, spoonacularScore, healthScore, instructions, diets, image} = req.body;
-    if (!title || !summary) return res.status(500).send({ error:"Necesita un titulo y un resumen como mínimo" });
-    //Checkeamos que tenga titulo y resumen si lo tiene pasamos a crear la receta
+    
     try{
         const recipe = await Recipe.create({
             id: uuidv4(),
@@ -21,17 +20,23 @@ const addRecipe = async function(req, res){
             instructions: instructions,
             image: image || "https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png"
         });
+        
         await recipe.setDietaTypes(diets)
-        res.redirect(`/recipes/${recipe.id}`); //cuando se crea, redireccionamos a la pagina creada
-    } catch(error){
+        
+        res.send(recipe);
+        
+    } 
+    catch(error){
         console.error(error);
     };
 };
 
 const getAllRecipes = async function(req, res){
+
     const ttl = req.query.name;
 
     if(!ttl){ //preguntamos si hay algun titulo ingresado en el query(es para cuando buscamos en el search)
+
         try{
             const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=100`);
             const infoNeededApi = await recipeApi.data.results.map((recipe) => {
@@ -47,6 +52,7 @@ const getAllRecipes = async function(req, res){
                     instructions: recipe.analyzedInstructions
                 }
             });
+
             const recipeDB = await Recipe.findAll({
                 include: {
                     model: DietaType,
@@ -56,8 +62,11 @@ const getAllRecipes = async function(req, res){
                     }
                 }
             });
+
             const response = await Promise.all([infoNeededApi, recipeDB])
+
             let [recipeApiRes, recipeDBres] = response;
+            
             res.send(recipeDBres.concat(recipeApiRes));
         }
         catch(error){
@@ -66,6 +75,7 @@ const getAllRecipes = async function(req, res){
     }
     else{
         const ttlMinus = ttl.toLowerCase(); //lo hacemos minuscula y buscamos coincidencias mapeando los titulos de la busqueda
+
         try{
             const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=100`); // .data.results.map((recipe) => {
             const infoNeededApi = await recipeApi.data.results.map((recipe) => {
@@ -98,7 +108,9 @@ const getAllRecipes = async function(req, res){
                 }
             });
             const response = await Promise.all([filterRecipeApi, recipeDB])
+
             let [filterRecipeApiRes, recipeDBres] = response;
+
             res.send(recipeDBres.concat(filterRecipeApiRes));
         }
         catch(error){
@@ -108,23 +120,12 @@ const getAllRecipes = async function(req, res){
 }
 
 const getRecipeById = async function(req, res){
+
     const id = req.params.id;
+
     try{ //buscamos en la api el id en primera instancia
-        const response = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
-        // const infoNeededApi = await response.data.map((recipe) => {
-        //     return {
-        //         title: recipe.title,
-        //         diets: recipe.diets.map((diet) => { return { category: diet } }),
-        //         healthScore: parseInt(recipe.healthScore),
-        //         summary: recipe.summary,
-        //         aggregateLikes: recipe.aggregateLikes,
-        //         image: recipe.image,
-        //         id: recipe.id,
-        //         spoonacularScore: parseInt(recipe.spoonacularScore),
-        //         instructions: recipe.analyzedInstructions
-        //     }
-        // });
         
+        const response = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
         res.json(response.data)
     }
     catch(error){ //si devuelve error 404 buscamos en DB

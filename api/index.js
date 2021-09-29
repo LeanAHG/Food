@@ -21,53 +21,73 @@ const server = require('./src/app.js');
 const { conn, DietaType } = require('./src/db.js');
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
 
-    var glutenFree = DietaType.create({
-      category: 'Gluten free'
-    })
+    // let glutenFree = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Gluten free'
+    //   }
+    // })
 
-    var dairyFree = DietaType.create({
-      category: 'Dairy free'
-    })
+    // let dairyFree = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Dairy free'
+    //   } 
+    // })
 
-    var lov = DietaType.create({
-      category: 'Lacto ovo vegetarian'
-    })
+    // let lov = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Lacto ovo vegetarian'
+    //   } 
+    // })
 
-    var vegan = DietaType.create({
-      category: 'Vegan'
-    })
+    // let vegan = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Vegan'
+    //   }  
+    // })
 
-    var vegetarian = DietaType.create({
-      category: 'Vegetarian'
-    })
+    // let vegetarian = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Vegetarian'
+    //   }
+    // })
 
-    var primal = DietaType.create({
-      category: 'Primal'
-    })
+    // let primal = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Primal'
+    //   }
+    // })
 
-    var paleolithic = DietaType.create({
-      category: 'Paleolithic'
-    })
+    // let paleolithic = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Paleolithic'
+    //   } 
+    // })
 
-    var pescatarian = DietaType.create({
-      category: 'Pescatarian'
-    })
+    // let pescatarian = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Pescatarian'
+    //   } 
+    // })
 
-    var ketogenic = DietaType.create({
-      category: 'Ketogenic'
-    })
+    // let ketogenic = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Ketogenic'
+    //   }  
+    // })
 
-    var whole = DietaType.create({
-      category: 'Whole 30'
-    })
+    // let whole = DietaType.findOrCreate({
+    //   where:{
+    //     category: 'Whole 30'
+    //   }  
+    // })
 
-    Promise.all([glutenFree, dairyFree, lov, vegan, vegetarian, primal, paleolithic, pescatarian, ketogenic, whole])
-      .then(res => {
-        console.log('Categorias precargadas')
-      });
+    // Promise.all([glutenFree, dairyFree, lov, vegan, vegetarian, primal, paleolithic, pescatarian, ketogenic, whole])
+    //   .then(res => {
+    //     console.log('Categorias precargadas')
+    //   });
   });
 });
