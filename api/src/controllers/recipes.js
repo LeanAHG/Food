@@ -24,7 +24,7 @@ const addRecipe = async function(req, res){
         await recipe.setDietaTypes(diets)
         res.redirect(`/recipes/${recipe.id}`); //cuando se crea, redireccionamos a la pagina creada
     } catch(error){
-        res.send(error);
+        console.error(error);
     };
 };
 
@@ -33,7 +33,7 @@ const getAllRecipes = async function(req, res){
 
     if(!ttl){ //preguntamos si hay algun titulo ingresado en el query(es para cuando buscamos en el search)
         try{
-            const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=10`);
+            const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=100`);
             const infoNeededApi = await recipeApi.data.results.map((recipe) => {
                 return {
                     title: recipe.title,
@@ -50,10 +50,10 @@ const getAllRecipes = async function(req, res){
             const recipeDB = await Recipe.findAll({
                 include: {
                     model: DietaType,
-                    attributes: ["category"]/*,
+                    attributes: ["category"],
                     through: {
                         attributes: []
-                    }*/
+                    }
                 }
             });
             const response = await Promise.all([infoNeededApi, recipeDB])
@@ -61,13 +61,13 @@ const getAllRecipes = async function(req, res){
             res.send(recipeDBres.concat(recipeApiRes));
         }
         catch(error){
-            res.send(error);
+            console.error(error);
         };
     }
     else{
         const ttlMinus = ttl.toLowerCase(); //lo hacemos minuscula y buscamos coincidencias mapeando los titulos de la busqueda
         try{
-            const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=10`); // .data.results.map((recipe) => {
+            const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=100`); // .data.results.map((recipe) => {
             const infoNeededApi = await recipeApi.data.results.map((recipe) => {
                 return {
                     title: recipe.title,
@@ -91,10 +91,10 @@ const getAllRecipes = async function(req, res){
             },
             include: {
                 model: DietaType,
-                attributes: ["category"]/*,
+                attributes: ["category"],
                 through: {
                     attributes: []
-                }*/
+                }
                 }
             });
             const response = await Promise.all([filterRecipeApi, recipeDB])
@@ -102,7 +102,7 @@ const getAllRecipes = async function(req, res){
             res.send(recipeDBres.concat(filterRecipeApiRes));
         }
         catch(error){
-            res.send(error);
+            console.error(error);
         }
     }
 }
@@ -128,16 +128,14 @@ const getRecipeById = async function(req, res){
         res.json(response.data)
     }
     catch(error){ //si devuelve error 404 buscamos en DB
-        console.log(error.response)
         if(error.response.status === 404){
-            // console.log(error)
             const recipe = await Recipe.findByPk(id, {
                 include: {
                     model: DietaType,
-                    attributes: ["category"]/*,
+                    attributes: ["category"],
                     through: {
                     attributes: []
-                    }*/
+                    }
                 }
             })
             if (recipe){

@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-// import "./index.css";
+import "./index.css";
 
 function LandingPage() {
     return (
@@ -11,7 +11,7 @@ function LandingPage() {
                     <div className="foodmain">Food</div>
                     <div className="Sub">Let's eat!</div>
                 </div>
-                <NavLink to="/home">
+                <NavLink to="/recipes">
                     <button className="activo">
                         Recipes
                     </button>

@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+
+.henrymain{
+left: 0px;
+width: 960px;
+height: 107px;
+text-align: center;
+font: normal normal normal 90px/109px Yeseva One;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+}
+
+.foodmain{
+    top: 414px;
+left: 0px;
+width: 960px;
+height: 73px;
+text-align: center;
+font: normal normal 300 60px/73px Montserrat;
+letter-spacing: 0px;
+color: #FFC400;
+opacity: 1;
+}
+
+.Sub{
+    top: 514px;
+left: 0px;
+width: 960px;
+height: 49px;
+text-align: center;
+font: normal normal 300 40px/49px Montserrat;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+}
+
+.activo{
+    top: 635px;
+    left: 350px;
+    width: 260px;
+    height: 84px;
+    background: #FFFFFF 0rem 0rem no-repeat padding-box;
+    border: 1px solid #FFC400;
+    border-radius: 70px;
+    opacity: 1;
+    color: #FFC400;
+    text-align: center;
+font: normal normal 300 40px/49px Montserrat;
+letter-spacing: 0px;
+opacity: 1;
+}
+
+
+.activo:hover{
+background: #FFCA1A 0rem 0rem no-repeat padding-box;
+color:white;
+cursor: pointer;
+}
+
+.panqueques{
+width: 721px;
+height: 1080px;
+}
+
+@media (max-width:1366px){
+    .panqueques{
+        height: 768px;
+        width: fit-content;
+    }
+    .landing{
+        height: 768px;
+    }
+    .intro{
+        width: 683px;
+    }
+    .henrymain{
+        width: 700px;
+    }
+    .foodmain{
+        width: 700px;
+    }
+    .Sub{
+        width: 700px;
+    }
+}
+
+.landing{
+    display: flex;
+    flex-direction: row;
+}
+
+.acomodar{
+    display: grid;
+    align-content: space-evenly;
+}

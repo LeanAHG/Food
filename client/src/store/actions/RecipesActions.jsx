@@ -11,20 +11,32 @@ export const FILTER_BY_DIET = "FILTER_BY_DIET"
 export const RESET = "Reset"
 
 export function getRecipes() {
-    return function (dispatch) {
-        return axios.get("/recipes").then((response) => {
+    return async function (dispatch) {
+        // return axios.get("/recipes")
+        //     .then((response) => response.json())
+        //     .then(json => {
+        //         dispatch({
+        //         type: "GET_RECIPES",
+        //         payload: json
+        //         })
+        //     })
+        //     .catch((error) => console.log(error));
+        try{
+            const {data} = await axios.get('http://localhost:3001/recipes')
             dispatch({
                 type: GET_RECIPES,
-                payload: response.data
+                payload: data
             })
-        })
-        .catch((error) => console.log(error));
+        }
+        catch(error){
+            console.error(error) //me marca en la consola el error
+        }
     }
 }
 
 export function getByName(title) {
-    return function (dispatch) {
-        return axios.get("/recipes?name=" + title).then((response) => {
+    return async function (dispatch) {
+        return axios.get("http://localhost:3001/recipes?name=" + title).then((response) => {
             dispatch({
                 type: GET_RECIPES_BY_NAME,
                 payload: response.data
@@ -35,7 +47,7 @@ export function getByName(title) {
 
 export function getDetail(id) {
     return function (dispatch) {
-        return axios.get("/recipes/" + id).then((response) => {
+        return axios.get("http://localhost:3001/recipes/" + id).then((response) => {
             dispatch({
                 type: GET_RECIPE_DETAIL,
                 payload: response.data
@@ -46,7 +58,7 @@ export function getDetail(id) {
 
 export function getTypes() {
     return function (dispatch) {
-        return axios.get("/types").then((response) => {
+        return axios.get("http://localhost:3001/types").then((response) => {
             dispatch({
                 type: GET_TYPES,
                 payload: response.data

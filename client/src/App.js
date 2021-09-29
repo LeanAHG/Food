@@ -1,21 +1,21 @@
 import './App.css';
 import React from "react";
 import { Route } from "react-router-dom";
-import Home from "./components/Home/Home";
-import Landing from "./components/Landing/Landing";
-import RecipeDetails from './components/RecipeDetails/RecipeDetails';
-import CreateRecipe from "./components/CreateRecipe/CreateRecipe";
-import NavBar from './components/NavBar/NavBar';
+import Home from "./modules/Home/Home";
+import LandingPage from "./modules/LandingPage/LandingPage";
+import FormContainer from './modules/FormContainer/FormContainer';
+import RecipeDetail from './modules/RecipeDetail/RecipeDetail';
+import NavBar from './modules/NavBar/NavBar';
 
 function App() {
   return (
     <React.Fragment>
     <Route path ='/recipes' component={NavBar} />
     <Route path ='/recipe' component={NavBar} />
-    <Route exact path="/" component={Landing} />
+    <Route exact path="/" component={LandingPage} />
     <Route exact path="/recipes" component={Home} />
-    <Route exact path="/recipes/:id" component={RecipeDetails} />
-    <Route exact path="/recipe" component={CreateRecipe} />
+    <Route exact path="/recipes/:id" component={RecipeDetail} />
+    <Route exact path="/recipe" component={FormContainer} />
     </React.Fragment>
   );
 }

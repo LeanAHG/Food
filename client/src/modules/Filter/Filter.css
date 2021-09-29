@@ -1,0 +1,49 @@
+.filter{
+    background: #131217;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.espaciado{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5px
+}
+
+.margen{
+    margin: 5px
+}
+
+
+  
+  .creacion{
+    border: none;
+    cursor: pointer;
+    color: white;
+    background: #FFCA1A 0% 0% no-repeat padding-box;
+border-radius: 70px;
+width: 260px;
+height: 60px; 
+text-align: center;
+font: normal normal 300 30px/49px Montserrat;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+  }
+
+.refresh{
+    border: none;
+    cursor: pointer;
+    color: white;
+    background: #FFCA1A 0% 0% no-repeat padding-box;
+border-radius: 70px;
+width: 260px;
+height: 60px; 
+text-align: center;
+font: normal normal 300 30px/49px Montserrat;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+}

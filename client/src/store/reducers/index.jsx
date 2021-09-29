@@ -38,21 +38,13 @@ const reducer = (state = INITIAL_STATE, action) => {
         case ASC:
             return {
                 ...state,
-                recipes: state.recipes
-                    .filter((b) => b.title !== null)
-                    .sort((a, b) =>{ 
-                        (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1);
-                    })
+                recipes: state.recipes.filter((b) => b.title !== null).sort((a, b) =>(a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1))
             };
 
         case DESC:
             return {
                 ...state,
-                recipes: state.recipes
-                    .filter((b) => b.title !== null)
-                    .sort((a, b) =>{
-                        (a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1);
-                    })
+                recipes: state.recipes.filter((b) => b.title !== null).sort((a, b) =>(a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1))
             };
 
         case MINMAX:
@@ -80,8 +72,7 @@ const reducer = (state = INITIAL_STATE, action) => {
             };
             
             let recipesFilter = [];
-            recipesFilter = state.recipes
-                .filter(e => e.diets?.map(e => e.name.toLowerCase()).includes(action.payload))
+            recipesFilter = state.recipes.filter(e => e.diets || e.dietaTypes?.map(e => e.category.toLowerCase()).includes(action.payload))
 
             return {
                 ...state, 
