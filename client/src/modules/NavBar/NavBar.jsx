@@ -7,7 +7,7 @@ import SearchBar from '../SearchBar/SearchBar';
 function NavBar({onSearch}) {
   return (
     <nav className="nav">
-      <NavLink to='/'>
+      <NavLink to='/recipes' className='navcomponent'>
         <span className="titulo">
           <div className="henryTitle">Henry</div>
           <div className="foodTitle">Food</div>

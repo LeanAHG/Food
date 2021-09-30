@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { getTypes } from '../../store/actions/RecipesActions';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import "./FormContainer.css"
 import Form from '../Form/Form';
 
 const initialForm = {

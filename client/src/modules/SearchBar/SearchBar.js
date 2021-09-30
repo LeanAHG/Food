@@ -21,7 +21,7 @@ function SearchBar(props) {
           <input
             type="text"
             id="title"
-            placeholder="What do you want to eat?"
+            placeholder="Search an ingredient"
             autoComplete="off"
             value={name}
             onChange={(e) => handleChange(e)}

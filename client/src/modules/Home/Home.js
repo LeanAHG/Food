@@ -17,7 +17,7 @@ const renderData = (recipes) => {
                     {recipes.diets && <p>Types of Diet: {recipe.diets.length !== 0? recipe.diets.map(diet => Object.values(diet)).join(", ").toLowerCase(): "Not available"}</p>}
                     {recipes.dietaTypes && <p>Types of Diet: {recipe.dietaTypes.length !== 0? recipe.dietaTypes.map(diet => Object.values(diet)).join(", ").toLowerCase(): "Not available"}</p>}
                 </div>
-            }) : <div className="no">No recipes available!</div>}</div>)
+            }) : <img className='loading' src="https://media.giphy.com/media/C8Vomoiu8j0FzOw4Hv/giphy.gif?cid=ecf05e4756h6ebsdmxy4ue0w7i8iqfluxaq0x6n5ozkgdmho&rid=giphy.gif&ct=s"/>}</div>)
 }
 
 function PaginationComponent({ recipes, getRecipes }) {
@@ -85,20 +85,10 @@ function PaginationComponent({ recipes, getRecipes }) {
         }
     };
 
-    let pageIncrementBtn = null;
-    if (pages.length > maxPageNumberLimit) {
-        pageIncrementBtn = <li onClick={handleNextbtn}> &hellip; </li>;
-    }
-
-    let pageDecrementBtn = null;
-    if (minPageNumberLimit >= 1) {
-        pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
-    }
-
     return !currentItems? null : (
         
         <div><Filter />
-            <h1 className="titleAll">All Recipes</h1> <br />
+            <br />
             {renderData(currentItems)}
             <ul className="pageNumbers">
                 <li>
@@ -109,10 +99,7 @@ function PaginationComponent({ recipes, getRecipes }) {
                         Prev
                     </button>
                 </li>
-                {pageDecrementBtn}
                 {renderPageNumbers}
-                {pageIncrementBtn}
-
                 <li>
                     <button
                         onClick={handleNextbtn}

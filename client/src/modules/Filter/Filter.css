@@ -1,5 +1,5 @@
 .filter{
-    background: #131217;
+    background: #b33939;
     color: #FFFFFF;
     display: flex;
     flex-direction: row;
@@ -22,7 +22,7 @@
     border: none;
     cursor: pointer;
     color: white;
-    background: #FFCA1A 0% 0% no-repeat padding-box;
+    background: #ffda79 0% 0% no-repeat padding-box;
 border-radius: 70px;
 width: 260px;
 height: 60px; 
@@ -37,7 +37,7 @@ opacity: 1;
     border: none;
     cursor: pointer;
     color: white;
-    background: #FFCA1A 0% 0% no-repeat padding-box;
+    background: #ffda79 0% 0% no-repeat padding-box;
 border-radius: 70px;
 width: 260px;
 height: 60px; 

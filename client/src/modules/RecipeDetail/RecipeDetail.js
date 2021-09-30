@@ -45,7 +45,7 @@ function RecipeDetail(props) {
                         </div>
                     </div>
                 </div>
-                : <h1 className="loading1">Loading ...</h1>
+                : <img className='loading' src="https://media.giphy.com/media/C8Vomoiu8j0FzOw4Hv/giphy.gif?cid=ecf05e4756h6ebsdmxy4ue0w7i8iqfluxaq0x6n5ozkgdmho&rid=giphy.gif&ct=s"/>
             }
             <NavLink to='/recipes'>
                 <button className="botonBackDetail">Back</button>

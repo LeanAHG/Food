@@ -5,7 +5,7 @@
 .create{
     font: normal normal normal 40px/86px Yeseva One;
     letter-spacing: 0px;
-    color: #FFC400;
+    color: #ffda79;
     opacity: 1;
     margin: 0px;
     padding: 0px;
@@ -16,7 +16,7 @@
 }
 
 .redSub{
-    color: orangered;
+    color: #ffda79;
     font:normal normal 300 20px/25px Montserrat;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@
 }
 
 .red{
-    color: orangered;
+    color: #ffda79;
     font:normal normal 300 20px/25px Montserrat;
 }
 
@@ -41,7 +41,7 @@
     border: none;
     cursor: pointer;
     color: white;
-    background: #FFCA1A 0rem 0rem no-repeat padding-box;
+    background: #ffda79 0rem 0rem no-repeat padding-box;
 border-radius: 70px;
 width: 260px;
 height: 60px; 
@@ -68,7 +68,7 @@ margin-top: 20px;
     border: none;
     cursor: pointer;
     color: white;
-    background: #FFCA1A 0rem 0rem no-repeat padding-box;
+    background: #ffda79 0rem 0rem no-repeat padding-box;
 border-radius: 70px;
 width: 260px;
 height: 60px; 

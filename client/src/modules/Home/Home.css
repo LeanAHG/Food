@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
 
 body {
-  background-color: black;
+  background-color: #131217;
 }
 .pageNumbers {
     list-style: none;
@@ -61,6 +61,13 @@ body {
  /* border: white solid; */
  width: 500px;
  height: 520px;
+ margin-top: 100px;
+}
+
+.loading{
+  position: absolute;
+  left: 35%;
+  padding-top: 130px;
 }
 
 .titleAll{
@@ -73,7 +80,7 @@ font: normal normal normal 35px/86px Yeseva One;
 letter-spacing: 0px;
 color: #FFC400;
 opacity: 1; 
-background-color: black;
+background-color: #b33939;
 }
 
 .recipeName{

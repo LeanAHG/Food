@@ -3,16 +3,21 @@
    color: white;
 }
 
+.loading{
+    position: absolute;
+    left: 35%;
+    padding-top: 130px;
+}
 .nombre{
     font: normal normal normal 60px/86px MADE Sunflower;
 letter-spacing: 0px;
-color: #FFC400;
+color: #ffda79;
 opacity: 1;
 left: 46px;
 text-align: center;
 font: normal normal normal 35px/86px Yeseva One;
 letter-spacing: 0px;
-color: #FFC400;
+color: #ffda79;
 opacity: 1; 
 }
 
@@ -36,7 +41,7 @@ opacity: 1;
     border: none;
     cursor: pointer;
     color: white;
-    background: #FFCA1A 0% 0% no-repeat padding-box;
+    background: #ffda79 0% 0% no-repeat padding-box;
     border-radius: 70px;
     width: 260px;
     height: 60px; 
@@ -47,11 +52,6 @@ opacity: 1;
     margin-top:50px;
     margin-bottom:50px;
     margin-left: 1100px;
-}
-
-.loading1{
-    font:normal normal 300 25px/61px Montserrat;
-    color:white
 }
 
 .summary{
