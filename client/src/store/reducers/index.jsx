@@ -14,7 +14,8 @@ const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, 
                 recipes: action.payload,
-                recipesOriginal: action.payload
+                recipesOriginal: action.payload,
+                recipeDetail: []
             };
 
         case GET_RECIPES_BY_NAME: 
@@ -70,9 +71,9 @@ const reducer = (state = INITIAL_STATE, action) => {
                     recipes: state.recipesOriginal
                 }
             };
-            
+            state.recipes = state.recipesOriginal
             let recipesFilter = [];
-            recipesFilter = state.recipes.filter(e => e.diets || e.dietaTypes?.map(e => e.category.toLowerCase()).includes(action.payload))
+            recipesFilter = state.recipes.filter(e => e.diets? e.diets.map(e => e.category.toLowerCase()).includes(action.payload) : e.dietaTypes? e.dietaTypes.map(e => e.category.toLowerCase()).includes(action.payload):[])
 
             return {
                 ...state, 

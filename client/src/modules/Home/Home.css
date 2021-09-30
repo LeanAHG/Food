@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
 
 body {
   background-color: #131217;
@@ -58,16 +58,13 @@ body {
 .card{
   color: white;
   text-align: center;
- /* border: white solid; */
- width: 500px;
- height: 520px;
- margin-top: 100px;
+  width: 400px;
+  height: 420px;
+  margin-top: 100px;
 }
 
 .loading{
-  position: absolute;
-  left: 35%;
-  padding-top: 130px;
+  position: relative;
 }
 
 .titleAll{
@@ -76,7 +73,7 @@ left: 46px;
 width: 630px;
 height: 84px;
 text-align: center;
-font: normal normal normal 35px/86px Yeseva One;
+font: normal normal normal 35px/86px Ephesis;
 letter-spacing: 0px;
 color: #FFC400;
 opacity: 1; 
@@ -85,7 +82,7 @@ background-color: #b33939;
 
 .recipeName{
   text-align: center;
-font: normal normal 300 25px/61px Montserrat;
+font: normal normal 300 25px/31px Montserrat;
 letter-spacing: 0px;
 color: #FFFFFF;
 opacity: 1;

@@ -77,7 +77,7 @@ const getAllRecipes = async function(req, res){
         const ttlMinus = ttl.toLowerCase(); //lo hacemos minuscula y buscamos coincidencias mapeando los titulos de la busqueda
 
         try{
-            const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=100`); // .data.results.map((recipe) => {
+            const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${API_KEY}&number=100`);
             const infoNeededApi = await recipeApi.data.results.map((recipe) => {
                 return {
                     title: recipe.title,
